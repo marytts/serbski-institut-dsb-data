@@ -1,2 +1,31 @@
+plugins {
+    id 'base'
+}
+
 group 'de.dfki.mary'
 version '0.1.0-SNAPSHOT'
+
+repositories {
+    ivy {
+        url 'https://digital.serbski-institut.de/marytts'
+        patternLayout {
+            artifact '[module].[ext]'
+        }
+        metadataSources {
+            artifact()
+        }
+    }
+}
+
+configurations {
+    data
+}
+
+dependencies {
+    data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '2022.10.05', ext: 'zip'
+}
+
+tasks.register('downloadData', Copy) {
+    into layout.buildDirectory.dir('data')
+    from configurations.data
+}
