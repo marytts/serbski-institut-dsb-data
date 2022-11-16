@@ -25,7 +25,14 @@ dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '2022.10.05', ext: 'zip'
 }
 
-tasks.register('downloadData', Copy) {
+tasks.register('unpackData', Copy) {
     into layout.buildDirectory.dir('data')
     from configurations.data
+    filesMatching '*.zip', { zipDetails ->
+        copy {
+            into destinationDir
+            from zipTree(zipDetails.file)
+        }
+        zipDetails.exclude()
+    }
 }
