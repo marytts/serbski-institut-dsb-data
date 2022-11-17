@@ -1,5 +1,6 @@
 plugins {
     id 'base'
+    id 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa'
 }
 
 group 'de.dfki.mary'
@@ -25,7 +26,7 @@ dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '2022.10.05', ext: 'zip'
 }
 
-tasks.register('unpackData') {
+def unpackDataTask = tasks.register('unpackData') {
     ext.textDir = objects.directoryProperty()
             .convention(layout.buildDirectory.dir('text'))
     ext.wavDir = objects.directoryProperty()
@@ -55,4 +56,13 @@ tasks.register('unpackData') {
             }
         }
     }
+}
+
+convertTextToMaryXml {
+    locale = Locale.forLanguageTag('dsb')
+    srcDir = unpackDataTask.get().textDir
+}
+
+prepareForcedAlignment {
+    wavDir = unpackDataTask.get().wavDir
 }
