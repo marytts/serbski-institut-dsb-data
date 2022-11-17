@@ -1,0 +1,3 @@
+[submodule "gradle-marytts-kaldi-mfa-plugin"]
+	path = gradle-marytts-kaldi-mfa-plugin
+	url = https://github.com/marytts/gradle-marytts-kaldi-mfa-plugin.git
