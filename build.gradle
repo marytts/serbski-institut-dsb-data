@@ -25,14 +25,34 @@ dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '2022.10.05', ext: 'zip'
 }
 
-tasks.register('unpackData', Copy) {
-    into layout.buildDirectory.dir('data')
-    from configurations.data
-    filesMatching '*.zip', { zipDetails ->
+tasks.register('unpackData') {
+    ext.textDir = objects.directoryProperty()
+            .convention(layout.buildDirectory.dir('text'))
+    ext.wavDir = objects.directoryProperty()
+            .convention(layout.buildDirectory.dir('wav'))
+    outputs.dir textDir
+    outputs.dir wavDir
+
+    doLast {
         copy {
-            into destinationDir
-            from zipTree(zipDetails.file)
+            into temporaryDir
+            from configurations.data
+            filesMatching '*.zip', { zipDetails ->
+                copy {
+                    into textDir
+                    from zipTree(zipDetails.file)
+                    include 'text/*.txt'
+                    eachFile { it.path = it.name }
+                    includeEmptyDirs = false
+                }
+                copy {
+                    into wavDir
+                    from zipTree(zipDetails.file)
+                    include 'wav/*.wav'
+                    eachFile { it.path = it.name }
+                    includeEmptyDirs = false
+                }
+            }
         }
-        zipDetails.exclude()
     }
 }
