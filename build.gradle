@@ -89,3 +89,22 @@ convertTextToMaryXml {
 prepareForcedAlignment {
     wavDir = unpackDataTask.get().wavDir
 }
+
+generateFlac {
+    srcFiles = unpackDataTask.get().wavDir.asFileTree
+}
+
+generateYaml {
+    yamlFile = file("${project.name}.yaml")
+}
+
+injectText {
+    yamlSrcFile = generateYaml.yamlFile
+    textDir = unpackDataTask.get().textDir
+    yamlDestFile = file("${project.name}_text.yaml")
+}
+
+injectSegments {
+    yamlSrcFile = injectText.yamlDestFile
+    labDir = tasks.named('convertTextGridToXLab').get().destDir
+}
