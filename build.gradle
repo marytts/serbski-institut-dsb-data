@@ -7,13 +7,33 @@ group 'de.dfki.mary'
 version '0.1.0-SNAPSHOT'
 
 repositories {
-    ivy {
-        url 'https://digital.serbski-institut.de/marytts'
-        patternLayout {
-            artifact '[module].[ext]'
+    mavenLocal()
+
+    exclusiveContent {
+        forRepository {
+            ivy {
+                url 'https://digital.serbski-institut.de/marytts'
+                patternLayout {
+                    artifact '[module].[ext]'
+                }
+                metadataSources {
+                    artifact()
+                }
+            }
         }
-        metadataSources {
-            artifact()
+        filter {
+            includeGroup 'de.serbski-institut'
+        }
+    }
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                url 'https://oss.sonatype.org/content/repositories/snapshots'
+            }
+        }
+        filter {
+            includeModule 'de.dfki.mary', 'marytts-lang-dsb'
         }
     }
 }
@@ -24,6 +44,8 @@ configurations {
 
 dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '2022.10.05', ext: 'zip'
+    marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.0-SNAPSHOT'
+    marytts group: 'de.dfki.mary', name: 'marytts-lexicon-dsb', version: '0.1.0'
 }
 
 def unpackDataTask = tasks.register('unpackData') {
