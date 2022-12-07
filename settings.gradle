@@ -1,2 +1,3 @@
 rootProject.name = 'serbski-institut-dsb-data'
 includeBuild 'gradle-marytts-kaldi-mfa-plugin'
+includeBuild 'gradle-flaml-plugin'
