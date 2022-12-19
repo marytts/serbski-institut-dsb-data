@@ -6,6 +6,7 @@ plugins {
 
 group 'de.dfki.mary'
 version '0.1.0-SNAPSHOT'
+description 'Lower Sorbian voice data for MaryTTS'
 
 repositories {
     mavenLocal()
@@ -76,6 +77,14 @@ convertTextToMaryXml {
 
 prepareForcedAlignment {
     wavDir = unpackDataTask.get().wavDir
+}
+
+generateComments {
+    properties = [
+            Description: project.description,
+            Contact    : 'https://github.com/marytts/serbski-institut-dsb-data',
+            License    : 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+    ]
 }
 
 generateFlac {
