@@ -1,7 +1,7 @@
 plugins {
     id 'base'
     id 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa' version '0.4.0'
-    id 'org.m2ci.msp.flaml'
+    id 'org.m2ci.msp.flaml' version '0.4.0'
 }
 
 group 'de.dfki.mary'

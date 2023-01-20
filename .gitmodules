@@ -1,3 +1,0 @@
-[submodule "gradle-flaml-plugin"]
-	path = gradle-flaml-plugin
-	url = https://github.com/m2ci-msp/gradle-flaml-plugin.git
