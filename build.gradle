@@ -1,18 +1,30 @@
 plugins {
     id 'base'
+    id 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa' version '0.4.0'
+    id 'org.m2ci.msp.flaml' version '0.4.0'
 }
 
 group 'de.dfki.mary'
 version '0.1.0-SNAPSHOT'
+description 'Lower Sorbian voice data for MaryTTS'
 
 repositories {
-    ivy {
-        url 'https://digital.serbski-institut.de/marytts'
-        patternLayout {
-            artifact '[module].[ext]'
+    mavenLocal()
+
+    exclusiveContent {
+        forRepository {
+            ivy {
+                url 'https://digital.serbski-institut.de/marytts'
+                patternLayout {
+                    artifact '[module].[ext]'
+                }
+                metadataSources {
+                    artifact()
+                }
+            }
         }
-        metadataSources {
-            artifact()
+        filter {
+            includeGroup 'de.serbski-institut'
         }
     }
 }
@@ -23,9 +35,10 @@ configurations {
 
 dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '2022.10.05', ext: 'zip'
+    marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.0'
 }
 
-tasks.register('unpackData') {
+def unpackDataTask = tasks.register('unpackData') {
     ext.textDir = objects.directoryProperty()
             .convention(layout.buildDirectory.dir('text'))
     ext.wavDir = objects.directoryProperty()
@@ -55,4 +68,40 @@ tasks.register('unpackData') {
             }
         }
     }
+}
+
+convertTextToMaryXml {
+    locale = Locale.forLanguageTag('dsb')
+    srcDir = unpackDataTask.get().textDir
+}
+
+prepareForcedAlignment {
+    wavDir = unpackDataTask.get().wavDir
+}
+
+generateComments {
+    properties = [
+            Description: project.description,
+            Contact    : 'https://github.com/marytts/serbski-institut-dsb-data',
+            License    : 'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+    ]
+}
+
+generateFlac {
+    srcFiles = unpackDataTask.get().wavDir.asFileTree
+}
+
+generateYaml {
+    yamlFile = file("${project.name}.yaml")
+}
+
+injectText {
+    yamlSrcFile = generateYaml.yamlFile
+    textDir = unpackDataTask.get().textDir
+    yamlDestFile = file("${project.name}_text.yaml")
+}
+
+injectSegments {
+    yamlSrcFile = injectText.yamlDestFile
+    labDir = tasks.named('convertTextGridToXLab').get().destDir
 }
