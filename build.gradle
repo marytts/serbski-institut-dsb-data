@@ -105,3 +105,8 @@ injectSegments {
     yamlSrcFile = injectText.yamlDestFile
     labDir = tasks.named('convertTextGridToXLab').get().destDir
 }
+
+artifacts {
+    'default' tasks.named('generateFlac').get().flacFile,
+            tasks.named('injectSegments').get().yamlDestFile
+}
