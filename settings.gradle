@@ -1,1 +1,2 @@
 rootProject.name = 'serbski-institut-dsb-data'
+includeBuild 'marytts-lang-dsb'

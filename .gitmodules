@@ -1,0 +1,3 @@
+[submodule "marytts-lang-dsb"]
+	path = marytts-lang-dsb
+	url = https://github.com/marytts/marytts-lang-dsb.git
