@@ -9,8 +9,6 @@ version '0.2.0-SNAPSHOT'
 description 'Lower Sorbian voice data for MaryTTS'
 
 repositories {
-    mavenLocal()
-
     exclusiveContent {
         forRepository {
             ivy {
