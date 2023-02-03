@@ -9,8 +9,6 @@ version '0.2.0-SNAPSHOT'
 description 'Lower Sorbian voice data for MaryTTS'
 
 repositories {
-    mavenLocal()
-
     exclusiveContent {
         forRepository {
             ivy {
@@ -35,7 +33,7 @@ configurations {
 
 dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '20230119', ext: 'zip'
-    marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.0'
+    marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.1'
 }
 
 def unpackDataTask = tasks.register('unpackData') {
