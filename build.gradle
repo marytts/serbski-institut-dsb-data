@@ -69,12 +69,12 @@ def unpackDataTask = tasks.register('unpackData') {
 }
 
 convertTextToMaryXml {
-    locale = Locale.forLanguageTag('dsb')
-    srcDir = unpackDataTask.get().textDir
+    locale.set Locale.forLanguageTag('dsb')
+    srcDir.set unpackDataTask.get().textDir
 }
 
 prepareForcedAlignment {
-    wavDir = unpackDataTask.get().wavDir
+    wavDir.set unpackDataTask.get().wavDir
 }
 
 generateComments {
@@ -90,18 +90,18 @@ generateFlac {
 }
 
 generateYaml {
-    yamlFile = file("${project.name}.yaml")
+    yamlFile.set file("${project.name}.yaml")
 }
 
 injectText {
-    yamlSrcFile = generateYaml.yamlFile
-    textDir = unpackDataTask.get().textDir
-    yamlDestFile = file("${project.name}_text.yaml")
+    yamlSrcFile.set generateYaml.yamlFile
+    textDir.set unpackDataTask.get().textDir
+    yamlDestFile.set file("${project.name}_text.yaml")
 }
 
 injectSegments {
-    yamlSrcFile = injectText.yamlDestFile
-    labDir = tasks.named('convertTextGridToXLab').get().destDir
+    yamlSrcFile.set injectText.yamlDestFile
+    labDir.set tasks.named('convertTextGridToXLab').get().destDir
 }
 
 artifacts {
