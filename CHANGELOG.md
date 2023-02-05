@@ -1,8 +1,8 @@
 Changelog
 =========
 
-[Unreleased]
-------------
+[v0.1.1] (2023-02-05)
+---------------------
 
 ### Changed
 
@@ -13,5 +13,5 @@ Changelog
 
 Initial release
 
-[Unreleased]: https://github.com/marytts/serbski-institut-dsb-data
+[v0.1.1]: https://github.com/marytts/serbski-institut-dsb-data/releases/tag/v0.1.1
 [v0.1.0]: https://github.com/marytts/serbski-institut-dsb-data/releases/tag/v0.1.0
