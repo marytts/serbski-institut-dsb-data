@@ -4,6 +4,12 @@ Changelog
 [Unreleased]
 ------------
 
+### Changed
+
+- Build with Gradle v7.6.4
+- Upgraded MFA plugin to v0.4.1
+- Upgraded marytts-lang-hsb to v0.1.2
+
 [v0.1.1] (2023-02-05)
 ---------------------
 

@@ -1,6 +1,6 @@
 plugins {
     id 'base'
-    id 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa' version '0.4.0'
+    id 'de.dfki.mary.voicebuilding.marytts-kaldi-mfa' version '0.4.1'
     id 'org.m2ci.msp.flaml' version '0.4.0'
 }
 
@@ -33,7 +33,7 @@ configurations {
 
 dependencies {
     data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '20230119', ext: 'zip'
-    marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.1'
+    marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.2'
 }
 
 def unpackDataTask = tasks.register('unpackData') {
