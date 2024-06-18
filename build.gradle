@@ -32,7 +32,7 @@ configurations {
 }
 
 dependencies {
-    data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '20230119', ext: 'zip'
+    data group: 'de.serbski-institut', name: 'dsb_audio_data', version: '20231220', ext: 'zip'
     marytts group: 'de.dfki.mary', name: 'marytts-lang-dsb', version: '0.1.2'
 }
 
