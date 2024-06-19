@@ -52,14 +52,14 @@ def unpackDataTask = tasks.register('unpackData') {
                 copy {
                     into textDir
                     from zipTree(zipDetails.file)
-                    include 'text/*.txt'
+                    include '**/text/*.txt'
                     eachFile { it.path = it.name }
                     includeEmptyDirs = false
                 }
                 copy {
                     into wavDir
                     from zipTree(zipDetails.file)
-                    include 'wav/*.wav'
+                    include '**/wav/*.wav'
                     eachFile { it.path = it.name }
                     includeEmptyDirs = false
                 }
