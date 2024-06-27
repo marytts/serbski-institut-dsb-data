@@ -40,7 +40,7 @@ def unpackDataTask = tasks.register('unpackData') {
     ext.textDir = objects.directoryProperty()
             .convention(layout.buildDirectory.dir('text'))
     ext.wavDir = objects.directoryProperty()
-            .convention(layout.buildDirectory.dir('wav'))
+            .convention(layout.buildDirectory.dir('wav_raw'))
     outputs.dir textDir
     outputs.dir wavDir
 
@@ -68,13 +68,18 @@ def unpackDataTask = tasks.register('unpackData') {
     }
 }
 
+def downmixWavFilesTask = tasks.register('downmixWavFiles', DownmixWavFiles) {
+    srcDir = unpackDataTask.get().wavDir
+    destDir = layout.buildDirectory.dir('wav')
+}
+
 convertTextToMaryXml {
     locale.set Locale.forLanguageTag('dsb')
     srcDir.set unpackDataTask.get().textDir
 }
 
 prepareForcedAlignment {
-    wavDir.set unpackDataTask.get().wavDir
+    wavDir.set downmixWavFilesTask.get().destDir
 }
 
 generateComments {
@@ -86,7 +91,7 @@ generateComments {
 }
 
 generateFlac {
-    srcFiles = unpackDataTask.get().wavDir.asFileTree
+    srcFiles = downmixWavFilesTask.get().destDir.asFileTree
 }
 
 generateYaml {
