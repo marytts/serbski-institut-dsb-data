@@ -4,6 +4,14 @@ Changelog
 [Unreleased]
 ------------
 
+### Added
+
+- More data from 2023-12-20
+
+### Changed
+
+- Upgraded marytts-lang-dsb to v0.2.0-SNAPSHOT
+
 [v0.1.2] (2024-04-30)
 ---------------------
 
