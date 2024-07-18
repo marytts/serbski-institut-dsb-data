@@ -82,6 +82,10 @@ prepareForcedAlignment {
     wavDir.set downmixWavFilesTask.get().destDir
 }
 
+convertTextGridToXLab {
+    labelMapping.put 'spn', '_'
+}
+
 generateComments {
     properties = [
             Description: project.description,
