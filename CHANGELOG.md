@@ -4,6 +4,10 @@ Changelog
 [Unreleased]
 ------------
 
+### Changed
+
+- Updated data to consistently mono, normalized audio
+
 [v0.2.0] (2024-10-02)
 ---------------------
 
