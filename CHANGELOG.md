@@ -7,6 +7,7 @@ Changelog
 ### Changed
 
 - Updated data to consistently mono, normalized audio
+- Upgraded marytts-lang-dsb to v0.2.1
 
 [v0.2.0] (2024-10-02)
 ---------------------
